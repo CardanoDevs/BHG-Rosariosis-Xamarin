@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage xmlns:basepages="clr-namespace:XFStructure.BasePages"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:Views="clr-namespace:XFStructure.Views"
+                    mc:Ignorable="d"
+                    x:Class="XFStructure.Modules.Login.Login"
+                    NavigationPage.HasNavigationBar="false">
+
+    <basepages:BasePage.MainContent>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Padding="20,0,20,8" Grid.Row="1">
+                <Frame Padding="0" Margin="0, 20, 0, 30" HasShadow="False">
+                    <Image Aspect="AspectFit" HorizontalOptions="Center" Source="index.jpg"/>
+                </Frame>
+
+                <Views:StandardEntry Grid.Row="2"
+                                    Padding="13"
+                                    BackgroundColor="#31FFFFFF"
+                                    BorderColor="Gray"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Placeholder="Username"
+                                     Text="{Binding Username}"
+                                    PlaceholderColor="Gray" />
+
+                <Views:StandardEntry Grid.Row="4"
+                                     Margin="0,20,0,0"
+                                    Padding="13"
+                                    BackgroundColor="#31FFFFFF"
+                                    BorderColor="Gray"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    IsPassword="True"
+                                    Placeholder="Password"
+                                     Text="{Binding Password}"
+                                    PlaceholderColor="Gray" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Switch VerticalOptions="Center" IsToggled="{Binding RememberMe}"/>
+                    <Label VerticalOptions="Center" Text="Remember Me"/>
+                </StackLayout>           
+
+            </StackLayout>
+
+            <Button Grid.Row="1"
+                    Margin="0,0,20,12"
+                    WidthRequest ="60"
+                    HeightRequest ="60"
+                    CornerRadius ="30"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="EndAndExpand"
+                    ImageSource="right_arrow.png"
+                    BackgroundColor="Gold"
+                    Command="{Binding LoginCommand}"/>
+                       
+        </Grid>
+    </basepages:BasePage.MainContent>
+
+</basepages:BasePage>

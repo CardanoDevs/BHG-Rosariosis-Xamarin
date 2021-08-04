@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage xmlns:basepages="clr-namespace:XFStructure.BasePages"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                    
+                    mc:Ignorable="d"
+                    x:Class="XFStructure.Modules.ClassRoom.GradePage"
+                    BackgroundColor="White"
+                    NavigationPage.HasNavigationBar="false">
+    <basepages:BasePage.MainContent>
+        <StackLayout>
+           
+            <StackLayout>
+                <Grid>
+                    <Image Aspect="AspectFill" Source="card7.jpg"/>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Row="0" Orientation="Horizontal">
+                            <Image Source="leftarrow3.png" VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateToClassRoom}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="ClassRoomName"
+                                   VerticalOptions="Center"
+                                   Margin="10, 0, 0, 0" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="" 
+                                   FontSize="Medium"
+                                   Text="{Binding CourseData.TITLE}"
+                                   LineBreakMode="TailTruncation"/>
+                            <!--<Label.Text>
+                                <MultiBinding StringFormat="{}{0} - {1}">
+                                    <Binding Path="MyGrades.COURSE_TITLE" />
+                                    <Binding Path="MyGrades.TEACHER_NAME" />
+                                </MultiBinding>
+                            </Label.Text>-->
+
+                            <Label x:Name="studentName"
+                                   VerticalOptions="End"
+                                   IsVisible="{Binding IsParent,Converter={StaticResource InvertBooleanConverter}}"
+                                   Padding="10,0,0,0"
+                                   TextColor="White" FontSize="Small" 
+                                   HorizontalOptions="EndAndExpand">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="UserData.FIRST_NAME" />
+                                        <Binding Path="UserData.LAST_NAME" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label x:Name="childName"
+                                   VerticalOptions="End"
+                                   IsVisible="{Binding IsParent}"
+                                   Padding="10,0,0,0"
+                                   TextColor="White" FontSize="Small" 
+                                   HorizontalOptions="EndAndExpand">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="SelectedChild.FIRST_NAME" />
+                                        <Binding Path="SelectedChild.LAST_NAME" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </StackLayout>
+                        <Label Grid.Row="1" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"
+                                   Margin="10, 0, 0, 0" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="" 
+                                   FontSize="Medium"
+                               Text="{Binding CourseData.TEACHER_NAME,StringFormat='Teacher : {0}'}"/>
+                    </Grid>
+
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Padding="10,10,10,0">
+                <Label Text="Grades Detail" HorizontalOptions="Center" Margin="0, 0, 0, 10" TextColor="Black" FontAttributes="Bold" FontSize="Medium"/>
+                <StackLayout>
+
+                    <ListView x:Name="gradeDetailList"
+                              ItemsSource="{Binding GradeDetailList}"
+                              ItemSelected="gradeDetailList_ItemSelected"
+                              SeparatorVisibility ="None"
+                              HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="10, 0, 10, 8" Padding="20, 15, 20, 15" BackgroundColor="#1e91fb" BorderColor="#ccc" CornerRadius="10" HasShadow="True">
+                                       
+                                        <StackLayout>
+                                            <Label FontAttributes="Bold" 
+                                                   FontSize="Medium" 
+                                                   VerticalTextAlignment="Center"
+                                                   TextColor="#fff"
+                                                   Text="{Binding TITLE}"/>
+
+                                            <StackLayout Orientation="Horizontal">
+
+                                                <Label                                                    
+                                                   FontSize="Small"
+                                                FontAttributes="Bold"
+                                                    HorizontalOptions="StartAndExpand"
+                                                TextColor="#fff">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}Grade : {0}  ({1})%">
+                                                            <Binding Path="GRADE" />
+                                                            <Binding Path="PERCENT" />
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+
+                                                <Label 
+                                                    TextColor="#fff"
+                                                   FontSize="Small" 
+                                                   FontAttributes="Bold">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}Points : {0} / {1}">
+                                                            <Binding Path="POINTS_EARNED" />
+                                                            <Binding Path="POINTS_TOTAL" />
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+
+                                            </StackLayout>
+                                            
+                                            <Label Text="Comment From Teacher" FontSize="Micro" Padding="0, 10, 0, 0" 
+                                                   TextColor="#fff"
+                                                   FontAttributes="Bold"/>
+
+                                            <Label                                                    
+                                                   FontSize="Small"
+                                                TextColor="#fff"                                                 
+                                                   Text="{Binding COMMENT}"/>
+
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <!--<StackLayout VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsGradeEmpty}">
+                    <Label TextColor="Black"
+                           FontSize="Small" 
+                           HorizontalTextAlignment="Center"
+                           Padding="10, 0, 10, 0"
+                           Text="There are no grades detail listed for you right now"/>
+                </StackLayout>-->
+            </StackLayout>
+            
+        </StackLayout>
+    </basepages:BasePage.MainContent>
+</basepages:BasePage>

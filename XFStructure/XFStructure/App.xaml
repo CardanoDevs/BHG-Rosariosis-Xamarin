@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:XFStructure.Converters"
+             mc:Ignorable="d"
+             x:Class="Shared.XFStructure.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!-- Converters -->
+            <converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+            
+            <!-- Colors -->
+            <Color x:Key="PrimaryColor">#eb7134</Color>
+            <Color x:Key="SecondaryColor">#eb7134</Color>
+            <Color x:Key="TertiaryColor">#eb7134</Color>
+
+            <!-- Styling -->
+            <OnPlatform x:Key="ActivityIndicator_Scale"
+                        x:TypeArguments="x:Double"
+                        Android="1"
+                        iOS="3" />
+            <Style x:Key="ActivityIndicator_Style"
+                   TargetType="ActivityIndicator">
+                <Setter Property="WidthRequest"
+                        Value="40" />
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="Scale"
+                        Value="{StaticResource ActivityIndicator_Scale}" />
+                <Setter Property="Color"
+                        Value="{StaticResource PrimaryColor}" />
+                <Setter Property="VerticalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+            </Style>
+
+            <Style x:Key="ActivityIndicator_Panel_Style"
+                   TargetType="StackLayout">
+                <Setter Property="Spacing"
+                        Value="0" />
+                <Setter Property="Opacity"
+                        Value="0.2" />
+                <Setter Property="BackgroundColor"
+                        Value="Black" />
+                <Setter Property="VerticalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+            </Style>
+
+            <x:String x:Key="ScreenTopMarginForiOS">0,20,0,0</x:String>
+            <x:String x:Key="LeftTopRightBottomPadding">13,13,13,0</x:String>
+            <OnPlatform x:Key="ScreenTopMargin"
+                        x:TypeArguments="x:Double"
+                        Android="0"
+                        iOS="0" />
+            <Style x:Key="ParentStack_SidePaddings"
+                   TargetType="StackLayout">
+                <Setter Property="Orientation"
+                        Value="Vertical" />
+                <Setter Property="Spacing"
+                        Value="13" />
+                <Setter Property="Margin"
+                        Value="{StaticResource ScreenTopMargin}" />
+                <Setter Property="Padding"
+                        Value="{StaticResource LeftTopRightBottomPadding}" />
+                <Setter Property="VerticalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

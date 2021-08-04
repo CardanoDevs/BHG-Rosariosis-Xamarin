@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage  xmlns:basepages="clr-namespace:XFStructure.BasePages" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:XFStructure.Helpers" xmlns:Views="clr-namespace:XFStructure.Views" xmlns:quiz="clr-namespace:XFStructure.Modules.Quiz"
+                x:Class="XFStructure.Modules.Assignments.Quiz"
+                NavigationPage.HasNavigationBar="False">
+    <basepages:BasePage.Content>
+        <StackLayout BackgroundColor="White">
+            <Grid>
+                <Image Source="card1.jpg"
+                            HeightRequest="100"
+                            Aspect="AspectFill"/>
+                <Grid Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Row="0" Orientation="Horizontal">
+                        <Image Source="leftarrow3.png" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label x:Name="ClassRoomName"
+                                   VerticalOptions="Center"
+                                   Margin="10, 0, 0, 0" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="" 
+                                   FontSize="Medium"
+                                   LineBreakMode="TailTruncation"
+                               Text="Quiz">
+                        </Label>
+                        <Label x:Name="studentName"
+                                   VerticalOptions="End"
+                                   IsVisible="{Binding IsParent,Converter={StaticResource InvertBooleanConverter}}"
+                                   Padding="10,0,0,0"
+                                   TextColor="White" FontSize="Small" 
+                                   HorizontalOptions="EndAndExpand"
+                                Text="Waleed Baig">
+                        </Label>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Margin="10, 50, 10, 0" Orientation="Horizontal">
+                        <Label x:Name="questionNumber" 
+                               VerticalOptions="End"
+                               HorizontalOptions="StartAndExpand"
+                               TextColor="White"
+                               FontAttributes="Bold"/>
+                        <Label x:Name="questionPoints" 
+                               VerticalOptions="End"
+                               HorizontalOptions="End"
+                               TextColor="White"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+            <StackLayout IsVisible="{Binding ShowQuizTime}" Orientation="Horizontal" Padding="20, 10, 20, 0">
+                <Label HorizontalOptions="EndAndExpand" FontSize="11" FontAttributes="Bold" Text="Time Remaining: "></Label>
+                <Label HorizontalOptions="End" FontSize="11" Text="{Binding QuizTime}"/>
+            </StackLayout>
+            <Label x:Name="questionText" FontAttributes="Bold" Padding="20, 10, 20, 0"/>
+            <Label x:Name="questionDesc" FontAttributes="Italic" TextType="Html" Padding="20, 10, 20, 0"/>
+            <StackLayout x:Name="containerStackLayout" Padding="10" Spacing="20"/>
+            <StackLayout Padding="20, 10, 20, 10" VerticalOptions="EndAndExpand">
+                <StackLayout Orientation="Horizontal"> 
+                    <Button Text="PREV" 
+                            BackgroundColor="#107ccc" 
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="10"
+                            Clicked="Prev_Button_Clicked"/>
+                    <Button Text="NEXT" 
+                            BackgroundColor="#107ccc" 
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="10"
+                            Clicked="Next_Button_Clicked"/>
+                </StackLayout>
+                <Button x:Name="SubmitButton" Text="SUBMIT"
+                        Clicked="Submit_Clicked"
+                        BackgroundColor="#16b820" 
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="10"/>
+            </StackLayout>
+        </StackLayout>
+    </basepages:BasePage.Content>
+</basepages:BasePage>

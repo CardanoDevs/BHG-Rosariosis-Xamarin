@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage xmlns:basepages="clr-namespace:XFStructure.BasePages"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:views="clr-namespace:XFStructure.Views"
+                    x:Class="XFStructure.Modules.ClassRoom.AssignmentDetail"
+                    NavigationPage.HasNavigationBar="False">
+    <basepages:BasePage.MainContent>
+        <StackLayout BackgroundColor="White">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Grid >
+                    <Image  Source="{Binding CourseData.BgCardImage}"
+                            HeightRequest="100"
+                            Aspect="AspectFill"/>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Row="0" Orientation="Horizontal">
+                            <Image Source="leftarrow3.png" VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateToQuizAssignment}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="ClassRoomName"
+                                   VerticalOptions="Center"
+                                   Margin="10, 0, 0, 0" 
+                                   TextColor="White" 
+                                   FontAttributes="Bold" 
+                                   FontFamily="" 
+                                   FontSize="Medium"
+                                   LineBreakMode="TailTruncation">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} - {1}">
+                                        <Binding Path="CourseData.TITLE" />
+                                        <Binding Path="CourseData.PERIOD" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label x:Name="studentName"
+                                   VerticalOptions="End"
+                                   IsVisible="{Binding IsParent,Converter={StaticResource InvertBooleanConverter}}"
+                                   Padding="10,0,0,0"
+                                   TextColor="White" FontSize="Small" 
+                                   HorizontalOptions="EndAndExpand">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="UserData.FIRST_NAME" />
+                                        <Binding Path="UserData.LAST_NAME" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label x:Name="childName"
+                                   VerticalOptions="End"
+                                   IsVisible="{Binding IsParent}"
+                                   Padding="10,0,0,0"
+                                   TextColor="White" FontSize="Small" 
+                                   HorizontalOptions="EndAndExpand">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="SelectedChild.FIRST_NAME" />
+                                        <Binding Path="SelectedChild.LAST_NAME" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+                <Frame CornerRadius="10" BackgroundColor="#107ccc" Margin="20, 10, 20, 0" Padding="10" IsVisible="{Binding AssignmentDetail.IS_CHECKED,Converter={StaticResource InvertBooleanConverter}}">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label TextColor="White" FontSize="Small" FontAttributes="Bold" Text="Assign Date : "/>
+                            <Label TextColor="White" FontSize="Small" Text="{Binding AssignmentDetail.ASSIGNED_DATE}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal">
+                                <Label TextColor="White" FontSize="Small" FontAttributes="Bold" Text="Due Date : "/>
+                                <Label TextColor="White" FontSize="Small" Text="{Binding AssignmentDetail.DUE_DATE}"/>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                <Label TextColor="White" FontSize="Small"  FontAttributes="Bold" Text="Marks : "/>
+                                <Label TextColor="White" FontSize="Small" Text="{Binding AssignmentDetail.POINTS}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout Padding="20, 10, 20, 10"
+                                 Orientation="Vertical" 
+                                 HorizontalOptions="Start">
+                            <Label Text="Description" TextColor="Black" FontAttributes="Bold"/>
+                            <StackLayout x:Name="StackDesc" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                <Label x:Name="lblDesc"
+                                       Text="{Binding AssignmentDetail.DESCRIPTION}"
+                                       TextColor="Black" 
+                                       VerticalOptions="StartAndExpand"
+                                       HorizontalOptions="StartAndExpand"
+                                       TextType="Html"
+                                       MaxLines="1"
+                                       Style="{DynamicResource BodyStyle}"/>
+                                <Label x:Name="lblDescLarge"
+                                       IsVisible="false" 
+                                       TextType="Html"
+                                       Text="{Binding AssignmentDetail.DESCRIPTION}"                                       
+                                       TextColor="Black" 
+                                       Style="{DynamicResource BodyStyle}"/>
+                                <Button x:Name="btnSee"  Padding="0" Margin="0"
+                                Clicked="btnSee_Clicked" TextColor="Black"
+                                Text="See more" FontSize="6"
+                                BackgroundColor="White"                                        
+                                CornerRadius="12" HeightRequest="26" WidthRequest="66"/>
+                                <!--<Frame x:Name="frameSee" Padding="4" Margin="0"
+                                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                       WidthRequest="84">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Frame.GestureRecognizers>
+                                    <Label x:Name="lblSee" Text="See more"
+                                           VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                                           TextColor="Black" FontSize="9"/>
+                                </Frame>-->
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Vertical" 
+                             VerticalOptions="StartAndExpand" 
+                             Spacing="0" 
+                             IsVisible="{Binding AssignmentDetail.IS_CHECKED,Converter={StaticResource InvertBooleanConverter}}">
+
+                            <Button Command="{Binding NavigateToOpenFile}"
+                            Text="Upload Files"
+                            CornerRadius="10"
+                            Margin="20, 0, 20, 10"
+                            VerticalOptions="Start"
+                            BackgroundColor="#107ccc"/>
+
+                            <Label 
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="20, 0, 20, 5"
+                        FontSize="Micro" 
+                        Text="Note: Your previous entries will be replaced if you submit new files"
+                        LineBreakMode="WordWrap"
+                        />
+
+                            <StackLayout HeightRequest="100"
+                                  Margin="20, 10, 20, 0"
+                                 IsVisible="{Binding IsVisibleFile}" >
+                                <Label Text="Your Selection" TextColor="Black" FontAttributes="Bold"/>
+                                <ListView ItemsSource="{Binding AssignmentFileList}"
+                              IsVisible="{Binding IsVisibleFile}"
+                              SeparatorVisibility="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Margin="20, 0, 20, 8">
+                                                    <Image WidthRequest="20" 
+                                               Source="txtfile.png" 
+                                               VerticalOptions="Center" />
+                                                    <Label 
+                                            VerticalOptions="Center"
+                                            TextColor="Black"                                                       
+                                            FontSize="Small"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding FileName}"/>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+
+                            <StackLayout Margin="20, 10, 20, 0" IsVisible="{Binding ShowPreviousFileSection}">
+                                <Label Text="Previous Submissions" TextColor="Black" FontAttributes="Bold"/>
+                                <ListView ItemsSource="{Binding AssignmentsDetailResponse.Files}"
+                              HeightRequest="100"
+                              Margin="0, 0, 0, 0"
+                              SeparatorVisibility="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Margin="20, 0, 20, 8">
+                                                    <Image WidthRequest="20" 
+                                               Source="txtfile.png" 
+                                               VerticalOptions="Center" />
+                                                    <Label 
+                                            VerticalOptions="Center"
+                                            TextColor="Black"                                                       
+                                            FontSize="Small"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding Name}"/>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+
+                            <!--<StackLayout IsVisible="{Binding IsVisibleFile,Converter={StaticResource InvertBooleanConverter}}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                        <Label TextColor="Black" Text="No File is Selected." />
+                    </StackLayout>-->
+
+                            <StackLayout Padding="20, 20, 20, 10" VerticalOptions="FillAndExpand">
+                                <Editor VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Placeholder="Type Your Message Here..."
+                                BackgroundColor="#fafafa"
+                                Text="{Binding Message}"
+                                AutoSize="TextChanges"
+                                TextColor="Black"/>
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="0" IsVisible="{Binding AssignmentDetail.IS_CHECKED,Converter={StaticResource InvertBooleanConverter}}">
+
+                            <StackLayout VerticalOptions="EndAndExpand" Margin="0, 0, 0, 10">
+                                <Button
+                            Command="{Binding NavigateToSaveFile}"
+                            Text="Submit"
+                            FontSize="Small"
+                            CornerRadius="10"
+                            Margin="20, 0, 20, 0"
+                            BackgroundColor="#16b820"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Margin="20,0,20,0" IsVisible="{Binding AssignmentDetail.IS_CHECKED}">
+                            <Frame CornerRadius="6" BackgroundColor="#16b820"  Padding="10,8,10,8">
+                                <StackLayout>
+                                    <StackLayout>
+                                        <Label x:Name="marks"
+                                       HorizontalOptions="CenterAndExpand"
+                                   Padding="10,0,0,0"
+                                   TextColor="White" FontSize="Small">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}Earned Marks: {0} out of {1}">
+                                                    <Binding Path="AssignmentDetail.POINTS_EARNED" />
+                                                    <Binding Path="AssignmentDetail.POINTS" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                        <Label x:Name="grades"
+                                       HorizontalOptions="CenterAndExpand"
+                                   Padding="10,0,0,0"
+                                   TextColor="White" FontSize="Small">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}Grade: {0}  ({1}&#37;)">
+                                                    <Binding Path="AssignmentDetail.GRADE" />
+                                                    <Binding Path="AssignmentDetail.PERCENTAGE" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                            <StackLayout Margin="0,10,0,0" Spacing="0">
+                                <Label Text="Message" TextColor="Black" FontAttributes="Bold"/>
+                                <Label Text="{Binding AssignmentsDetailResponse.Message}" TextColor="Black" FontSize="Medium"/>
+                            </StackLayout>
+                            <StackLayout Margin="0,10,0,0" Spacing="0" IsVisible="{Binding ShowPreviousFileSection}">
+                                <Label Text="Your Submissions" TextColor="Black" FontAttributes="Bold"/>
+
+                                <ListView ItemsSource="{Binding AssignmentsDetailResponse.Files}"
+                              HeightRequest="100"
+                              Margin="0, 20, 0, 0"
+                              SeparatorVisibility="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Margin="20, 0, 20, 8">
+                                                    <Image WidthRequest="20" 
+                                               Source="txtfile.png" 
+                                               VerticalOptions="Center" />
+                                                    <Label 
+                                            VerticalOptions="Center"
+                                            TextColor="Black"                                                       
+                                            FontSize="Small"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding Name}"/>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+
+                            </StackLayout>
+                            <!--AssignmentsDetailResponse-->
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+               
+            </StackLayout>
+        </StackLayout>
+    </basepages:BasePage.MainContent>
+</basepages:BasePage>

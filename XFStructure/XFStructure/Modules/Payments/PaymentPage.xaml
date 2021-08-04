@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage  xmlns:basepages="clr-namespace:XFStructure.BasePages" 
+                     xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                     
+                     x:Class="XFStructure.Modules.Payments.PaymentPage"
+                     NavigationPage.HasNavigationBar="False">
+    <basepages:BasePage.MainContent>
+        <StackLayout>
+            <Label FontSize="20" TextColor="Black" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Text="Purchase Page"/>
+            <Button Text="Purchase"    
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding NavigateToPurchase}"/>
+        </StackLayout>
+    </basepages:BasePage.MainContent>
+</basepages:BasePage>
+
+<!--<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XFStructure.Modules.Payments.PaymentPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>-->

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage xmlns:basepages="clr-namespace:XFStructure.BasePages"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                    
+                    x:Class="XFStructure.Modules.Login.SchoolPage"
+                    NavigationPage.HasNavigationBar="false">
+
+    <basepages:BasePage.MainContent>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Padding="20,0,20,8" Grid.Row="1">
+                <Frame Padding="0" Margin="0, 20, 0, 0" HasShadow="False">
+                    <Image Aspect="AspectFit" HorizontalOptions="Center" Source="index.jpg"/>
+                </Frame>
+
+                <Frame
+                       Padding="20,8,20,8"
+                       CornerRadius="6"
+                        HasShadow="False">
+                    <Label HorizontalOptions="CenterAndExpand"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           Text="Select Your School"/>
+                </Frame>
+
+                <Frame HasShadow="False" Padding="10, 0, 10, 0">
+                    <ListView x:Name="schoolsList"
+                          ItemsSource="{Binding SchoolList}"
+                            SeparatorVisibility="None"
+                              Margin="0,12,0,0"
+                          ItemSelected="schoolsList_ItemSelected"
+                          HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame BackgroundColor="#1e91fb" 
+                                           Margin="20, 0, 20, 10"
+                                           Padding="20, 8, 20, 8" CornerRadius="10">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SchoolSelected, Source={x:Reference schoolsList}}"
+                                                              CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Label Text="{Binding Name}"
+                                               HorizontalTextAlignment="Center"
+                                               FontAttributes="Bold"
+                                           TextColor="White"/>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </Frame>
+               
+            </StackLayout>
+
+        </Grid>
+    </basepages:BasePage.MainContent>
+</basepages:BasePage>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1098594552788",
+    "firebase_url": "https://globalsis-dev.firebaseio.com",
+    "project_id": "globalsis-dev",
+    "storage_bucket": "globalsis-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098594552788:android:4d6ad6fb3ff7454e2b6441",
+        "android_client_info": {
+          "package_name": "com.globalsis.mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098594552788-ekgr33u475sf18endjddgomdh0a1h5kh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqAqS_cho6hCkEzopgiLnTusMy9cM4QEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098594552788-ekgr33u475sf18endjddgomdh0a1h5kh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

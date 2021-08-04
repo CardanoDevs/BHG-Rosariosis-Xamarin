@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage  xmlns:basepages="clr-namespace:XFStructure.BasePages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XFStructure.Modules.Login.CheckUser"
+                     BackgroundColor="White"
+                     NavigationPage.HasNavigationBar="False">
+    <basepages:BasePage.MainContent>
+        <Grid>
+
+        </Grid>
+    </basepages:BasePage.MainContent>
+</basepages:BasePage>
+
+<!--<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XFStructure.Modules.Login.CheckUser">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>-->

@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basepages:BasePage xmlns:basepages="clr-namespace:XFStructure.BasePages"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                    
+                    mc:Ignorable="d"
+                    x:Class="XFStructure.Modules.ClassRoom.YourClassRoom"
+                    BackgroundColor="White"
+                    NavigationPage.HasNavigationBar="false">
+    <basepages:BasePage.MainContent>
+        <Grid>
+
+            <Grid Padding="20, 20, 20, 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" VerticalOptions="Start" Orientation="Horizontal">
+                    <Label IsVisible="{Binding IsClassRoom}" TextColor="Black" FontAttributes="Bold" Text="Your Classrooms"/>
+                    <Label IsVisible="{Binding IsAnnoucement}" TextColor="Black" FontAttributes="Bold" Text="Announcements"/>
+                    <Label IsVisible="{Binding IsGrades}" TextColor="Black" FontAttributes="Bold" Text="Grades"/>
+                    <Label x:Name="studentName"
+                       IsVisible="{Binding IsParent,Converter={StaticResource InvertBooleanConverter}}"
+                                  TextColor="Black" 
+                                   FontAttributes="Bold" HorizontalOptions="EndAndExpand">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="UserData.FIRST_NAME" />
+                                <Binding Path="UserData.LAST_NAME" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label IsVisible="{Binding IsParent}"
+                       TextColor="Black"
+                       Text="{Binding ChildName}"
+                       FontAttributes="Bold" HorizontalOptions="EndAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <!--<Image Source="menuvertical.png" Margin="0, 0, -10, 0" VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToClassandAnnoucement}" CommandParameter="logout"/>
+                        </Image.GestureRecognizers>
+                    </Image>-->
+                </StackLayout>
+
+                <ListView x:Name="coursesList" IsVisible="{Binding IsClassRoom}"
+                      Grid.Row="1"
+                      Margin="0, 10, 0, 0"
+                      SeparatorVisibility ="None"
+                      ItemSelected="coursesList_ItemSelected"
+                      ItemsSource="{Binding FilteredCourseListToShow}"
+                      HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame x:Name="courseFrame" HeightRequest="180" Padding="0" Margin="0, 0, 0, 10" CornerRadius="15" BackgroundColor="LightGray" HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                        Command="{Binding Path=BindingContext.NavigateToQuizesAssignment, Source={x:Reference coursesList}}"
+                                        CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid>
+                                        <Image Source="{Binding BgCardImage}" Aspect="Fill"/>
+                                        <StackLayout VerticalOptions="FillAndExpand">
+                                            <Label VerticalOptions="Start" Margin="15, 10, 15, 0" TextColor="White" FontSize="Large" FontAttributes="Bold">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0}">
+                                                        <Binding Path="TITLE" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            <StackLayout Spacing="0" Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand">
+                                                <Label VerticalOptions="Center" 
+                                                   TextColor="White" 
+                                                   FontAttributes="Bold" 
+                                                   Margin="15, 0, 15, 10" 
+                                                   FontSize="Medium" 
+                                                   Text="{Binding TEACHER_NAME}"/>
+                                                <Label Text="{Binding ROOM,StringFormat='Room {0}'}"
+                                                   HorizontalOptions="EndAndExpand"
+                                                   TextColor="White" 
+                                                   Margin="15, 0, 15, 10" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="Medium"/>
+                                                <!--<Label.Text>
+                                                <MultiBinding StringFormat="{} Room {0}">
+                                                    <Binding Path="ROOM" />
+                                                </MultiBinding>
+                                            </Label.Text>-->
+
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ListView x:Name="annoucementList"
+                         Grid.Row="1"
+                          IsVisible="{Binding IsAnnoucement}"
+                      Margin="0, 10, 0, 0"
+                             ItemSelected="annoucementList_ItemSelected"
+                      SeparatorVisibility ="None"
+                      ItemsSource="{Binding AnnoucementList}"
+                      HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="15, 10" Margin="5, 0, 5, 10"
+                                       BackgroundColor="{Binding BgColor}"
+                                       CornerRadius="10" HasShadow="False">
+                                    <StackLayout>
+                                        <!--<Label
+                                        FontSize="Caption"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Title}"/>-->
+                                        <!--<BoxView WidthRequest="1" HeightRequest="1" BackgroundColor="White"/>-->
+                                        <Label TextColor="White"
+                                           FontSize="Small"
+                                           LineBreakMode="WordWrap"
+                                           Text="{Binding Text}"/>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ListView x:Name="gradeList"
+                          Grid.Row="1"
+                          IsVisible="{Binding IsGrades}"
+                          Margin="0, 10, 0, 0"                      
+                              ItemsSource="{Binding FilteredCourseListToShow}"
+                              ItemSelected="gradeList_ItemSelected"
+                              SeparatorVisibility ="None"
+                              HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="0, 0, 0, 8" Padding="15, 10, 15, 10" BackgroundColor="#1e91fb" CornerRadius="20" HasShadow="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.NavigateToGradeDetail,Source={x:Reference gradeList}}" 
+                                                                          CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontAttributes="Bold" 
+                                                   FontSize="Medium" 
+                                                   VerticalOptions="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   TextColor="White"
+                                                   Text="{Binding TITLE}"/>
+                                        <!--<Label 
+                                                   VerticalOptions="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   FontSize="12" 
+                                                   FontAttributes="Italic" 
+                                                   TextColor="White"
+                                                   HorizontalOptions="EndAndExpand"
+                                                   Text="{Binding GRADE,StringFormat='Grade : {0}'}"/>-->
+                                        <Label TextColor="White" 
+                                                   FontSize="Small" 
+                                                   FontAttributes="Bold"
+                                                   Padding="0, 0, 3, 0"
+                                                   HorizontalOptions="EndAndExpand"
+                                                   VerticalOptions="Center">
+                                            <MultiBinding StringFormat="{}{0} % ({1})">
+                                                <Binding Path="PERCENTAGE" />
+                                                <Binding Path="GRADE" />
+                                            </MultiBinding>
+                                        </Label>
+
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout Grid.Row="2" Padding="0,8,0,0" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+                    <Grid ColumnSpacing="30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <!--<ColumnDefinition Width="Auto"/>-->
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Row="0" Grid.Column="0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateToClassandAnnoucement}" CommandParameter="classroom"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="book.png"/>
+                            <Label TextColor="Black" FontAttributes="Bold" FontSize="Micro" Text="Your Classrooms"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateToClassandAnnoucement}" CommandParameter="annoucement"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="bell.png"/>
+                            <Label TextColor="Black" FontAttributes="Bold" FontSize="Micro" Text="Annoucements"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="2">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateToClassandAnnoucement}" CommandParameter="grades"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="star.png"/>
+                            <Label TextColor="Black" FontSize="Micro" FontAttributes="Bold" Text="Grades"/>
+                        </StackLayout>
+                        <!--<StackLayout Grid.Row="0" Grid.Column="3">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateToClassandAnnoucement}" CommandParameter="logout"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="power.png"/>
+                            <Label TextColor="Black" FontSize="Micro" FontAttributes="Bold" Text="Logout"/>
+                        </StackLayout>-->
+                    </Grid>
+                </StackLayout>
+
+            </Grid>
+
+            <ContentView x:Name="popupView" BackgroundColor="#C0808080" Padding="10, 0"
+                         HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                         IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+
+                <StackLayout Orientation="Vertical" Margin="30, 0, 30, 0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+
+                    <Frame Margin="0,10,0,0" CornerRadius="10" BackgroundColor="White">
+                        <StackLayout>
+                            <Label x:Name="lblLoadingText"
+                               TextColor="Black"
+                                   Margin="0, 0, 0, 10"
+                               HorizontalOptions="Center" 
+                               VerticalTextAlignment="Center"
+                               FontSize="Body"
+                               Text="Select Your Child"/>
+                            <ListView x:Name="childList"
+                                  ItemsSource="{Binding StudentList}"
+                                  HasUnevenRows="True"
+                                  SeparatorVisibility="None"
+                                  HeightRequest="300"
+                                  ItemSelected="childList_ItemSelected">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Frame BackgroundColor="#29b6f6" 
+                                                   CornerRadius="10" 
+                                                   Padding="10"
+                                                   Margin="0,0,0,10">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command="{Binding Path=BindingContext.NavigateSelectStudent,Source={x:Reference childList}}" 
+                                                        CommandParameter="{Binding .}"
+                                                        Tapped="TapGestureRecognizer_Tapped_1"/>
+                                                </Frame.GestureRecognizers>
+                                                <Label TextColor="White" FontAttributes="Bold" HorizontalOptions="Center">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="FIRST_NAME" />
+                                                            <Binding Path="LAST_NAME" />
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+                                            </Frame>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                    <Button Text="Close"
+                            TextColor="White"
+                            BackgroundColor="#29b6f6"
+                            Clicked="Button_Clicked"
+                            CornerRadius="10"/>
+                </StackLayout>
+
+            </ContentView>
+
+        </Grid>
+    </basepages:BasePage.MainContent>
+</basepages:BasePage>
+    
