@@ -41,11 +41,11 @@
                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                         </Label.GestureRecognizers>
                     </Label>
-                    <!--<Image Source="menuvertical.png" Margin="0, 0, -10, 0" VerticalOptions="Center">
+                    <Image Source="menuvertical.png" Margin="0, 0, -10, 0" VerticalOptions="Center">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToClassandAnnoucement}" CommandParameter="logout"/>
                         </Image.GestureRecognizers>
-                    </Image>-->
+                    </Image>
                 </StackLayout>
 
                 <ListView x:Name="coursesList" IsVisible="{Binding IsClassRoom}"
