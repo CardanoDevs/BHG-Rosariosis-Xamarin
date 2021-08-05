@@ -191,8 +191,8 @@ namespace XFStructure.Modules.ClassRoom
         {
             try
             {
-                if (IsFirst)
-                {
+                //if (IsFirst)
+                //{
 
                     IsFirst = false;
 
@@ -216,7 +216,7 @@ namespace XFStructure.Modules.ClassRoom
 
                     //await LoadGrades();
 
-                }
+                //}
                 base.OnAppearing();
             }
             catch (Exception ex)
@@ -333,7 +333,7 @@ namespace XFStructure.Modules.ClassRoom
                 CrossSecureStorage.Current.DeleteKey("clientToken");
                 await Navigation.RemoveCurrentAndNavigate<YourClassRoomViewModel, SchoolViewModel>();
             }
-
+            OnAppearing();
         }
 
         private void ExecuteSelectedStudent(object obj)
