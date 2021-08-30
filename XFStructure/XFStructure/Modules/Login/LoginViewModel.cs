@@ -27,7 +27,7 @@ namespace XFStructure.Modules.Login
         public USER USER { get; set; }
 
         //private string _username = "waleed";
-        private string _username = "atcartwright";
+        private string _username = "";
         //private string _username = "";
 
         public string Username
@@ -38,7 +38,7 @@ namespace XFStructure.Modules.Login
 
         //private string _password = "superman2020#";
         //private string _password = "tabernacle";
-        private string _password = "Gba2019";
+        private string _password = "";
         //private string _password = "";
 
         public string Password
