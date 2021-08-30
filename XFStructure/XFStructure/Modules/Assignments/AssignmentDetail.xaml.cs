@@ -34,7 +34,10 @@ namespace XFStructure.Modules.ClassRoom
                 //lblSee.VerticalOptions = LayoutOptions.FillAndExpand;
                 //lblSee.HorizontalTextAlignment = TextAlignment.Center;
                 //lblSee.VerticalTextAlignment = TextAlignment.Center;                
-                if (string.IsNullOrEmpty(vm.AssignmentDetail.DESCRIPTION) && vm.AssignmentDetail.DESCRIPTION.Length<=30)
+                if (string.IsNullOrEmpty(vm.AssignmentDetail.DESCRIPTION))
+                {
+                    btnSee.IsVisible = false;
+                } else if(vm.AssignmentDetail.DESCRIPTION.Length <= 30)
                 {
                     btnSee.IsVisible = false;
                 }
@@ -76,7 +79,7 @@ namespace XFStructure.Modules.ClassRoom
                 lblDesc.IsVisible = false;
                 this.lblDescLarge.IsVisible = true;
                 btnSee.Text = "See less";
-                btnSee.WidthRequest = 66;
+                 btnSee.WidthRequest = 66;
                 //frameSee.WidthRequest = 60;
                 //frameSee.VerticalOptions = LayoutOptions.CenterAndExpand;
                 //frameSee.HorizontalOptions = LayoutOptions.CenterAndExpand;

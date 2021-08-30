@@ -47,6 +47,7 @@
     </AndroidTlsProvider>
     <LangVersion>8.0</LangVersion>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidKeyStore>false</AndroidKeyStore>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -68,6 +69,7 @@
     <AndroidSupportedAbis />
     <LangVersion>8.0</LangVersion>
     <AndroidDexTool>dx</AndroidDexTool>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
