@@ -29,13 +29,28 @@ namespace XFStructure.Modules.Login
             get { return _isSchoolVisible; }
             set {SetField(ref _isSchoolVisible , value); }
         }
-
+        private List<School> _filteredSchoolList;
+        public List<School> FilteredSchoolList
+        {
+            get { return _filteredSchoolList; }
+            set { SetField(ref _filteredSchoolList, value); }
+        }
         #endregion
-
+        private string _keyword;
+        public string keyword
+        {
+            get { return _keyword; }
+            set
+            {
+                SetField(ref _keyword, value);
+            }
+        }
         #region Command
 
         private ICommand _schoolSelected;
         public ICommand SchoolSelected => _schoolSelected ?? (_schoolSelected = new Command(SelectedSchool));
+
+        public ICommand FilterSchool => (new Command(SchoolFilter));
 
         #endregion
 
@@ -43,15 +58,35 @@ namespace XFStructure.Modules.Login
 
         public SchoolViewModel()
         {
-
+            FilteredSchoolList = new List<School>();
         }
 
         public override async void OnAppearing()
         {
             base.OnAppearing();
-            await LoadSchools();
+            //FilteredSchoolList = SchoolList;
         }
-
+        public async void SchoolFilter(object obj)
+        {
+            await LoadSchools();
+            List<School> filter;
+            filter = new List<School>();
+            if (keyword != null && keyword.Length != 0)
+            {
+                foreach (School school in SchoolList)
+                {
+                    if (school.Name.ToLower().StartsWith(keyword.ToLower()))
+                    {
+                        filter.Add(school as School);
+                    }
+                }
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert("Error", "Please enter School Name.", "OK");
+            }
+            FilteredSchoolList = filter;
+        }
         private async Task LoadSchools()
         {
             try
@@ -62,7 +97,7 @@ namespace XFStructure.Modules.Login
                     SchoolList = result.Schools;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }           
@@ -80,13 +115,12 @@ namespace XFStructure.Modules.Login
                     await Navigation.PushPageAsync<SchoolViewModel,LoginViewModel>((vm) => { });
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
             
         }
-
         #endregion
     }
 }

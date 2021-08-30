@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <basepages:BasePage xmlns:basepages="clr-namespace:XFStructure.BasePages"
                     xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                    
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="XFStructure.Modules.Login.SchoolPage"
                     NavigationPage.HasNavigationBar="false">
 
@@ -23,12 +23,24 @@
                            TextColor="Black"
                            FontSize="Medium"
                            FontAttributes="Bold"
-                           Text="Select Your School"/>
+                           Text="Search Your School"/>
                 </Frame>
-
+                <Frame HasShadow="False" 
+                       Padding="10, 0, 10, 0">
+                    <StackLayout 
+                                 Padding="20, 8, 20, 8">
+                        <Editor 
+                                Text="{Binding keyword}" 
+                                Placeholder="Search..."/>
+                        <Button Command="{Binding FilterSchool}"
+                                Text="Search" 
+                                BackgroundColor="Green" 
+                                CornerRadius="10" />
+                    </StackLayout>
+                </Frame>
                 <Frame HasShadow="False" Padding="10, 0, 10, 0">
                     <ListView x:Name="schoolsList"
-                          ItemsSource="{Binding SchoolList}"
+                          ItemsSource="{Binding FilteredSchoolList}"
                             SeparatorVisibility="None"
                               Margin="0,12,0,0"
                           ItemSelected="schoolsList_ItemSelected"
