@@ -47,11 +47,9 @@ namespace DataStore.Customization.Stores
         {
             try
             {
-
-                //var uri = "https://www.gs4ed.com/assignment/api/Schools.php?key=12345";
-                //var uri = "https://www.stratusarchives.com/assignment/api/Schools.php?Key=12345";
+                //var uri = "https://globalsismobile.gs4ed.com/api/Schools.php?key=12345";
                 var uri = "http://10.10.12.188/api/Schools.php?key=12345";
-
+                
                 var result = await RequestProvider.GetAsync<SchoolResponse>(uri);
                 return result;
             }
