@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <StackLayout Padding="20,0,20,8" Grid.Row="1">
                 <Frame Padding="0" Margin="0, 20, 0, 30" HasShadow="False">
-                    <Image Aspect="AspectFit" HorizontalOptions="Center" Source="index.jpg"/>
+                    <Image Aspect="AspectFit" HorizontalOptions="Center" Source="search.png"/>
                 </Frame>
 
                 <Views:StandardEntry Grid.Row="2"
