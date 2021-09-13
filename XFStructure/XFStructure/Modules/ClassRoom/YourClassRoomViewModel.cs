@@ -331,6 +331,7 @@ namespace XFStructure.Modules.ClassRoom
                 CrossSecureStorage.Current.DeleteKey("RememberMe");
                 CrossSecureStorage.Current.DeleteKey("UserData");
                 CrossSecureStorage.Current.DeleteKey("clientToken");
+                CrossSecureStorage.Current.DeleteKey("BaseUrl");
                 await Navigation.RemoveCurrentAndNavigate<YourClassRoomViewModel, SchoolViewModel>();
             }
             OnAppearing();

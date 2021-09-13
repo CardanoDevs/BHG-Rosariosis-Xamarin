@@ -16,6 +16,7 @@ namespace DataStore.Customization.Helpers
 
         public static UriBuilder GetPath(string path, UriQueryBuilder queryBuilder = null)
         {
+            _baseUrl = CrossSecureStorage.Current.GetValue("BaseUrl");
             path = _baseUrl + path;
             _uriBuilder = new UriBuilder(path);
             //_uriBuilder.Path = path;
