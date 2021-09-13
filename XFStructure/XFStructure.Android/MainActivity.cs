@@ -15,7 +15,7 @@ using Xamarin.Forms;
 
 namespace XFStructure.Droid
 {
-    [Activity(Label = "GlobalSIS", ScreenOrientation = ScreenOrientation.Portrait, Icon = "@drawable/index", Theme = "@style/splashscreen",
+    [Activity(Label = "GlobalSIS", ScreenOrientation = ScreenOrientation.Portrait, Icon = "@drawable/logo", Theme = "@style/splashscreen",
         MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
